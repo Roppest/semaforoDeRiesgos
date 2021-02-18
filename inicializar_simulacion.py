@@ -7,10 +7,13 @@ django.setup()
 from simulacion.models import Caso
 import pandas as pd
 
+def borrar():
+    Caso.objects.all().delete()
 def nutrir():
     data = pd.read_csv('casos_simulados.csv')
     for index,row in data.iterrows():
         caso = Caso(
+        id = index,
         mag = row['Mag'],
         s_lat = row['Slat'],
         s_long = row['Slong'],
@@ -25,6 +28,9 @@ def nutrir():
         sem = row['Sem'],
         )
         caso.save()
+        
 if __name__== '__main__':
+    print('Borrando registros...')
+    borrar()
     print('Nutriendo BD de simulacion...')
     nutrir()
