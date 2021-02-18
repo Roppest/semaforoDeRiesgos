@@ -1,3 +1,7 @@
 # Proyecto en Django para micositio de Semaforo de Riesgos
 ### Para correr
-`$ python manage.py runserver`
+
+```bash
+$ python inicializar_simulacion.py
+$ python manage.py runserver
+```
