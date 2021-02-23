@@ -14,3 +14,6 @@ class Caso(models.Model):
     v = models.DecimalField(max_digits=2, decimal_places=1)
     ir = models.DecimalField(max_digits=3, decimal_places=2)
     sem = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f'Sismo con magnitud {self.mag} resultado en semaforo {self.sem}'

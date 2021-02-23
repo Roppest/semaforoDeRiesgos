@@ -20,6 +20,7 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('semaforo/', include('semaforo.urls')),
     path('simulacion/', include('simulacion.urls')),
+    path('simulacion/caso', include('simulacion.urls')),
     path('admin/', admin.site.urls)
 
 ]
