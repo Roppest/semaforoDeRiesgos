@@ -5,9 +5,73 @@
     <meta charset="utf-8">
     <title>Mi Semáforo</title>
     <link rel="stylesheet" href="{% static 'simulacion/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <h1>Último Sismo Detectado</h1>
-    {{caso_random}}
+
+    
+    
+   <div class="container">
+    <header class="jumbotron text-center my-4">
+      <h1 class="display-3">Último Sismo Detectado</h1>
+      <p class="lead">{{caso_random}}.</p>
+    </header>
+   </div>
+   <div class='container'>
+    <div class='row'>
+      <div class='col-sm-6 text-center'>
+        <h3 class='display-3'>Epicentro</h3>
+        <div id='epicentro' style='width:500px;height:300px;background:grey;'></div>         
+      </div>
+      <div class='col-sm-6 text-center'>
+        <h3 class='display-3'>Magnitud</h3>
+        <h2>{{caso_random.mag}}</h2>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-6 text-center'>
+        <h3 class='display-3'>Localización Actual</h3>
+        <div id='persona' style='width:500px;height:300px;background:grey;'></div>
+      </div>
+      <div class='col-sm-6 text-center'>
+        <h3 class='display-3'>Semáforo</h3>
+        {{caso_random.sem}}
+      </div>
+    </div>
+   </div>
+   <script>
+    function initMap(){
+      var epicentroOptions={
+        center: new google.maps.LatLng({{caso_random.s_lat}},{{caso_random.s_long}}),
+        zoom: 5,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      };
+      var personaOptions={
+        center: new google.maps.LatLng({{caso_random.p_lat}},{{caso_random.p_long}}),
+        zoom: 5,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      }
+      var mapaEpicentro = new google.maps.Map(
+        document.getElementById("epicentro"), 
+        epicentroOptions); 
+      mark1 = new google.maps.Marker({
+        position: {lat:{{caso_random.s_lat}},lng:{{caso_random.s_long}}},
+        mapaEpicentro,
+        title: 'Epicentro',
+      });
+      mark1.setMap(mapaEpicentro);
+      var persona = new google.maps.Map(
+        document.getElementById("persona"),
+        personaOptions);  
+      mark2 = new google.maps.Marker({
+        position: {lat:{{caso_random.p_lat}},lng:{{caso_random.p_long}}},
+        persona,
+        title: 'Mi Ubicacion',});
+      mark2.setMap(persona);
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBuH3aNm2RrWezE9q8LbFhT_d-k8rc1gM&callback=initMap"></script>  
   </body>
 </html>
