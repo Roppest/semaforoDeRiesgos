@@ -4,12 +4,79 @@
   <head>
     <meta charset="utf-8">
     <title>Mi Semáforo</title>
-    <link rel="stylesheet" href="{% static 'simulacion/style.css' %}">
+    <!--link rel="stylesheet" href="{% static 'simulacion/style.css' %}"-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <script>
+      function initMap(){
+        var epicentroOptions={
+          center: new google.maps.LatLng({{caso_random.s_lat}},{{caso_random.s_long}}),
+          zoom: 5,
+          mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var mapaEpicentro = new google.maps.Map(
+          document.getElementById("epicentro"), 
+          epicentroOptions); 
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        mark1 = new google.maps.Marker({
+          position: {lat:{{caso_random.s_lat}},lng:{{caso_random.s_long}}},
+          mapaEpicentro,
+          icon: iconBase + 'earthquake.png',
+          title: 'Epicentro',
+        });
+        
+        mark1.setMap(mapaEpicentro);
+        mark2 = new google.maps.Marker({
+          position: {lat:{{caso_random.p_lat}},lng:{{caso_random.p_long}}},
+          mapaEpicentro,
+          title: 'Mi Ubicacion',});
+        mark2.setMap(mapaEpicentro);
+      }
+      function init(caso){
+        var movi_span = document.getElementById('movilidad');
+        movi_span.innerHTML = caso.d_sen;
+      }
+      function getMovilidad(d_fis){
+        ponderacion={
+          '2.5' : 'No puedo desplazarme',
+          '2': 'Dependo de la ayuda de otras personas para desplazarme',
+          '1.5': 'Utilizo silla de ruedas o muletas para desplazarme.',
+          '1': 'Puedo moverme con ligeras complicaciones, sin necesidad de ayuda',
+          '0.5': 'Puedo evacuar en caso de emergencia sin ayuda.'
+        };
+        let key = String(d_fis)
+
+        var movi_span = document.getElementById('movilidad');
+        movi_span.innerHTML = ponderacion[key];
+      }
+      function getSensorial(d_sen){
+        ponderacion={
+          '2.5' : 'No puedo escuchar alarmas ni visualizar rutas de evacuación.',
+          '1.5': 'Se me dificulta ver o escuchar alarmas e indicaciones de evacuación.',
+          '0.5': 'Puedo escuchar indicaciones y alarmas claramente y observar rutas de evacuación.'
+        };
+        let key = String(d_sen)
+  
+        var sen_span = document.getElementById('sensorial');
+        sen_span.innerHTML = ponderacion[key];
+      }
+      function getUbicacion(u){
+        ponderacion={
+          '2.5' : 'Del séptimo piso en adelante de un inmueble.',
+          '2.0': 'Del cuarto al sexto piso de un inmueble.',
+          '1.5': 'En el tercer o segundo piso de un inmueble.',
+          '1.0': 'En la planta baja de un inmueble.',
+          '0.5': 'En zona despejada.'
+        };
+        let key = String(u)
+        
+        var u_container = document.getElementById('ubicacion');
+        u_container.innerHTML = ponderacion[key];
+      }
+    </script>
    <div class="container">
     <header class="jumbotron text-center my-4">
       <h1 class="display-3">Último Sismo Detectado</h1>
@@ -29,7 +96,11 @@
     </div>
     <div class='row'>
       <div class='col-sm-4 text-center'>
-        <h3 class='display-3'>Vulnerabilidades</h3>
+        <h3 class='display-3'>Mi Vulnerabilidad</h3>
+        <p id='movilidad' class='text-left'><script>getMovilidad({{caso_random.d_fis}});</script> </p>
+        <p id='sensorial' class='text-left'><script>getSensorial({{caso_random.d_sen}});</script> </p>
+        <p id='ubicacion' class='text-left'><script>getUbicacion({{caso_random.u}});</script> </p>
+        
         <div id='vulnerabilidades'></div>
       </div>
       <div class='col-sm-4 text-center'>
@@ -42,29 +113,7 @@
       </div>
     </div>
    </div>
-   <script>
-    function initMap(){
-      var epicentroOptions={
-        center: new google.maps.LatLng({{caso_random.s_lat}},{{caso_random.s_long}}),
-        zoom: 5,
-        mapTypeId: google.maps.MapTypeId.HYBRID
-      };
-      var mapaEpicentro = new google.maps.Map(
-        document.getElementById("epicentro"), 
-        epicentroOptions); 
-      mark1 = new google.maps.Marker({
-        position: {lat:{{caso_random.s_lat}},lng:{{caso_random.s_long}}},
-        mapaEpicentro,
-        title: 'Epicentro',
-      });
-      mark1.setMap(mapaEpicentro);
-      mark2 = new google.maps.Marker({
-        position: {lat:{{caso_random.p_lat}},lng:{{caso_random.p_long}}},
-        mapaEpicentro,
-        title: 'Mi Ubicacion',});
-      mark2.setMap(mapaEpicentro);
-    }
-  </script>
+  
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBuH3aNm2RrWezE9q8LbFhT_d-k8rc1gM&callback=initMap"></script>  
   </body>
 </html>
