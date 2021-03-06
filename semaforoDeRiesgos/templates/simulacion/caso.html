@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <title>Mi Semáforo</title>
     <link rel="stylesheet" href="{% static 'simulacion/style.css' %}">
+    <style>
+      .vulnerabilidades{
+        font-size: 20px;
+      }
+    </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -35,57 +40,7 @@
           mapaEpicentro,
           title: 'Mi Ubicacion',});
         mark2.setMap(mapaEpicentro);
-      }
-      function init(caso){
-        var movi_span = document.getElementById('movilidad');
-        movi_span.innerHTML = caso.d_sen;
-      }
-      function getMovilidad(d_fis){
-        ponderacion={
-          '2.5' : 'No puedo desplazarme',
-          '2': 'Dependo de la ayuda de otras personas para desplazarme',
-          '1.5': 'Utilizo silla de ruedas o muletas para desplazarme.',
-          '1': 'Puedo moverme con ligeras complicaciones, sin necesidad de ayuda',
-          '0.5': 'Puedo evacuar en caso de emergencia sin ayuda.'
-        };
-        let key = String(d_fis)
-
-        var movi_span = document.getElementById('movilidad');
-        if(ponderacion[key] === undefined )
-          console.log('Undefined ERROR: Valor d_fis=',key,' no tiene ponderacion.');
-        else
-          movi_span.innerHTML = ponderacion[key];
-      }
-      function getSensorial(d_sen){
-        ponderacion={
-          '2.5' : 'No puedo escuchar alarmas ni visualizar rutas de evacuación.',
-          '1.5': 'Se me dificulta ver o escuchar alarmas e indicaciones de evacuación.',
-          '0.5': 'Puedo escuchar indicaciones y alarmas claramente y observar rutas de evacuación.'
-        };
-        let key = String(d_sen)
-  
-        var sen_span = document.getElementById('sensorial');
-        if(ponderacion[key] === undefined )
-          console.log('Undefined ERROR: Valor d_sen=',key,' no tiene ponderacion.');
-        else
-          sen_span.innerHTML = ponderacion[key];
-      }
-      function getUbicacion(u){
-        ponderacion={
-          '2.5': 'Del séptimo piso en adelante de un inmueble.',
-          '2': 'Del cuarto al sexto piso de un inmueble.',
-          '1.5': 'En el tercer o segundo piso de un inmueble.',
-          '1': 'En la planta baja de un inmueble.',
-          '0.5': 'En zona despejada.'
-        };
-        let key = String(u)
-        
-        var u_container = document.getElementById('ubicacion');
-        if(ponderacion[key] === undefined )
-          console.log('Undefined ERROR: Valor d_sen =',key,'no tiene ponderacion.');
-        else
-         u_container.innerHTML = ponderacion[key];
-      }
+        }
     </script>
    <div class="container">
     <header class="jumbotron text-center my-4">
@@ -108,9 +63,9 @@
     <div class='row'>
       <div class='col-sm-4 text-center'>
         <h3 class='display-3'>Mi Vulnerabilidad</h3>
-        <p id='movilidad' class='text-left'><script>getMovilidad({{caso_random.d_fis}});</script> </p>
-        <p id='sensorial' class='text-left'><script>getSensorial({{caso_random.d_sen}});</script> </p>
-        <p id='ubicacion' class='text-left'><script>getUbicacion({{caso_random.u}});</script> </p>
+        <p id='movilidad' class='vulnerabilidades'><script>getMovilidad({{caso_random.d_fis}});</script> </p>
+        <p id='sensorial' class='vulnerabilidades'><script>getSensorial({{caso_random.d_sen}});</script> </p>
+        <p id='ubicacion' class='vulnerabilidades'><script>getUbicacion({{caso_random.u}});</script> </p>
         
         <div id='vulnerabilidades'></div>
       </div>
