@@ -52,17 +52,17 @@
     <div class='row'>
       <div class='col-sm-6 text-center'>
         <h3 class='display-3'>Epicentro y Localización Actual</h3>
-        <div id='epicentro' style='width:500px;height:300px;background:grey;'></div>         
+        <div id='epicentro' class='map'></div>         
       </div>
       <div class='col-sm-6 text-center'>
         <h3 class='display-3'>Magnitud</h3>
-        <h2>{{caso_random.mag}}</h2>
+        <h2 class="">{{caso_random.mag}}</h2>
       </div>
     </div>
     <hr>
     <div class='row'>
-      <div class='col-sm-4 text-center'>
-        <h3 class='display-3'>Mi Vulnerabilidad</h3>
+      <div class='col-sm-4 '>
+        <h3 class='display-3 text-center'>Mi Vulnerabilidad</h3>
         <p id='movilidad' class='vulnerabilidades'><script>getMovilidad({{caso_random.d_fis}});</script> </p>
         <p id='sensorial' class='vulnerabilidades'><script>getSensorial({{caso_random.d_sen}});</script> </p>
         <p id='ubicacion' class='vulnerabilidades'><script>getUbicacion({{caso_random.u}});</script> </p>
@@ -73,9 +73,12 @@
         <h3 class='display-3'>Índice de Riesgo Calculado</h3>
         <h3>{{caso_random.ir}}</h3>
       </div>
-      <div class='col-sm-4 text-center'>
-        <h3 class='display-3'>Mi Semáforo</h3>
-        {{caso_random.sem}}
+      <div class='col-sm-4 flex-column centered-flex'>
+        <h3 class='display-3 flex-element'>Mi Semáforo</h3>
+        <div id='semaforo' class='semaforo flex-element'><script>getSemaforo('{{caso_random.sem}}');</script></div>
+        <header class='flex-element'>
+          {{caso_random.sem}}
+        </header>  
       </div>
     </div>
    </div>

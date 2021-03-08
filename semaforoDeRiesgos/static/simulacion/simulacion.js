@@ -21,7 +21,6 @@ function getSensorial(d_sen){
         '0.5': 'Puedo escuchar indicaciones y alarmas claramente y observar rutas de evacuación.'
     };
     let key = String(d_sen)
-
     var sen_span = document.getElementById('sensorial');
     if(ponderacion[key] === undefined )
         console.log('Undefined ERROR: Valor d_sen=',key,' no tiene ponderacion.');
@@ -43,4 +42,16 @@ function getUbicacion(u){
         console.log('Undefined ERROR: Valor d_sen =',key,'no tiene ponderacion.');
     else
         u_container.innerHTML = ponderacion[key];
+}
+function getSemaforo(sem){
+    ponderacion={
+        'verde':'#00D024',
+        'amarillo': '#FFD400',
+        'rojo': 'crimson'
+    };
+    let key = String(sem);
+    if(ponderacion[sem]=== undefined)
+        console.log('Undefined ERROR: Valor de sem =',sem,'no tiene ponderacion')
+    else
+        document.getElementById('semaforo').style.backgroundColor=ponderacion[sem];
 }
