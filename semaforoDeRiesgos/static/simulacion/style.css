@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+:root{
+    --sem-size: 120px;
+}
 .centered-flex{
     justify-content: center;
     align-items: center;
@@ -11,10 +15,20 @@
 .flex-element{
     padding-bottom: 5%;
 }
-.semaforo{
-    height: 80px;
-    width: 80px;
+.indice{
+    padding: 10%;
     
+    font-size: 60px;
+    font-family: 'Roboto', sans-serif;
+    background-color:#eee;
+    border-radius: 15px;
+    background-size: 50px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: darkslategrey;
+}
+.semaforo{
+    height: var(--sem-size);
+    width: var(--sem-size);
     border-radius: 50%;
     border: solid black 2px;
 }
@@ -23,3 +37,14 @@
     height:300px;
     background:grey;
 }
+ul{
+  list-style: none;  
+}
+
+/*ul li::before {
+    content: "\2022"; 
+    color: black; 
+    font-weight: bold; 
+    display: inline-block; 
+    width: 1em; 
+    margin-left: -1em; */

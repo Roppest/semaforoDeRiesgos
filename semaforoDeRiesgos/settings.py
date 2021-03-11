@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'fontawesome-free',
     'semaforo.apps.SemaforoConfig',
     'simulacion.apps.SimulacionConfig',
     'django.contrib.admin',

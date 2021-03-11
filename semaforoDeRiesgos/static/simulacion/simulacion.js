@@ -1,3 +1,11 @@
+function getColor(valor){
+    if(valor < 5.0)
+        return '#00D024'
+    else if(valor < 7.0)
+        return '#FFD400'
+    else
+        return 'crimson'
+}
 function getMovilidad(d_fis){
         ponderacion={
           '2.5' : 'No puedo desplazarme',
@@ -46,7 +54,7 @@ function getUbicacion(u){
 function getSemaforo(sem){
     ponderacion={
         'verde':'#00D024',
-        'amarillo': '#FFD400',
+        'amarillo': '#FFD700',
         'rojo': 'crimson'
     };
     let key = String(sem);
@@ -54,4 +62,15 @@ function getSemaforo(sem){
         console.log('Undefined ERROR: Valor de sem =',sem,'no tiene ponderacion')
     else
         document.getElementById('semaforo').style.backgroundColor=ponderacion[sem];
+}
+
+function inicializar(){
+    let indices = document.getElementsByClassName('indice');
+    for(i of indices)
+    {
+        i.style.color = getColor(i.innerHTML)
+        i.style.backgroundColor = '#eee';
+    }
+    let vulnerabilidades = document.getElementsByClassName('vulnerabilidades');
+    
 }
