@@ -6,6 +6,10 @@
     justify-content: center;
     align-items: center;
 }
+.bootstrap-select .btn{
+    white-space: normal;
+    word-wrap: break-word;
+}
 
 .flex-column{
     display: flex;
@@ -15,9 +19,14 @@
 .flex-element{
     padding-bottom: 5%;
 }
+.form-control{
+    font-size: 20px !important;
+    height: 100% !important;
+    overflow: visible;
+    white-space: initial;
+}
 .indice{
     padding: 10%;
-    
     font-size: 60px;
     font-family: 'Roboto', sans-serif;
     background-color:#eee;
@@ -26,11 +35,20 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: darkslategrey;
 }
+.jumbotron{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
 .semaforo{
     height: var(--sem-size);
     width: var(--sem-size);
     border-radius: 50%;
     border: solid black 2px;
+}
+select{
+    text-transform: none;
+    height: auto !important;
+    width: 100% !important;
 }
 .map{
     width:500px;
@@ -40,11 +58,3 @@
 ul{
   list-style: none;  
 }
-
-/*ul li::before {
-    content: "\2022"; 
-    color: black; 
-    font-weight: bold; 
-    display: inline-block; 
-    width: 1em; 
-    margin-left: -1em; */

@@ -45,7 +45,7 @@
         }
     </script>
    <div class="container">
-    <header class="jumbotron text-center my-4">
+    <header class="jumbotron jumbotron-fluid text-center my-4">
       <h1 class="display-3">Último Sismo Detectado</h1>
       <p class="lead">{{caso_random}}.</p>
     </header>
@@ -63,19 +63,39 @@
     </div>
     <hr>
     <div class='row'>
-      <div class='col-sm-4 '>
+      <div class='col-sm-6 '>
         <h3 class='display-3 text-center'>Mi Vulnerabilidad</h3>
         <ul class='fa-ul'>
-          <li><span class="fa-li"><i class="fas fa-walking fa-3x"></i></span><span id='movilidad' class='vulnerabilidades'><script>getMovilidad({{caso_random.d_fis}});</script></span></li><br>
-          <li><span class='fa-li'><i class="fas fa-assistive-listening-systems fa-2x"></i></span><span id='sensorial' class='vulnerabilidades'><script>getSensorial({{caso_random.d_sen}});</script></li><br>
-          <li><span class='fa-li'><i class='far fa-building fa-2x'></i></span><span id='ubicacion' class='vulnerabilidades'><script>getUbicacion({{caso_random.u}});</script></li><br>     
+          <li><span class="fa-li"><i class="fas fa-walking fa-3x"></i></span>
+            <select class="form-control" id="movilidad_select" onchange="recalcularIR({{caso_random}})">
+              <!-- <option selected id='movilidad' class='vulnerabilidades'><script>getMovilidad({{caso_random.d_fis}});</script></option> -->
+              <script>
+                renderMovilidadOptions('movilidad_select');
+                setSelectedOption('movilidad_select',{{caso_random.d_fis}});
+              </script>
+            </select>
+            </span>
+          </li><br>
+          <li>
+            <span class='fa-li'>
+              <i class="fas fa-assistive-listening-systems fa-2x"></i>
+            </span>
+                <span class='vulnerabilidades' id='sensorial'><script>getSensorial({{caso_random.d_sen}});</script></span>
+          </li><br>
+          <li>
+            <span class='fa-li'>
+              <i class='far fa-building fa-2x'></i>
+            </span>
+            <span id='ubicacion' class='vulnerabilidades'><script>getUbicacion({{caso_random.u}});
+            </script>
+          </li><br>
         </ul>
       </div>
-      <div class='col-sm-4 text-center'>
+      <div class='col-sm-3 text-center'>
         <h3 class='display-3'>Índice de Riesgo Calculado</h3>
         <p class='indice'>{{caso_random.ir}}</p>
       </div>
-      <div class='col-sm-4 flex-column centered-flex'>
+      <div class='col-sm-3 flex-column centered-flex'>
         <h3 class='display-3 flex-element'>Mi Semáforo</h3>
         <div id='semaforo' class='semaforo flex-element'><script> getSemaforo('{{caso_random.sem}}');</script></div>
         <header class='flex-element'>

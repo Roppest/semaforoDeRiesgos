@@ -22,6 +22,55 @@ function getMovilidad(d_fis){
         else
           movi_span.innerHTML = ponderacion[key];
 }
+function renderMovilidadOptions(container_id){
+   
+    let movilidad={
+        '2.5' : 'No puedo desplazarme',
+        '2': 'Dependo de la ayuda de otras personas para desplazarme',
+        '1.5': 'Utilizo silla de ruedas o muletas para desplazarme.',
+        '1': 'Puedo moverme con ligeras complicaciones, sin necesidad de ayuda',
+        '0.5': 'Puedo evacuar en caso de emergencia sin ayuda.'
+    };
+    let opciones=[]
+    for(key in movilidad){
+        let opt=document.createElement('option');
+        opt.text=movilidad[key];
+        opt.value=key;
+        opt.className='vulnerabilidades';
+        opciones.push(opt);  
+    }
+    
+    opciones.sort((a,b)=>{
+        if (a.value < b.value)
+            return -1;
+        else
+            return 1;
+    });
+    let container=document.getElementById(container_id);
+    for(op in opciones){
+        container.appendChild(opciones[op]);
+    }
+        
+}
+function recalcularIr(caso){
+    
+}
+function setSelectedOption(select_id,option_value){
+    let options=document.getElementById(select_id).options;
+    let sorted_opts=Array.prototype.slice.call(options);
+    sorted_opts.sort((a,b)=>{
+        if (a.value < b.value)
+            return -1;
+        else
+            return 1;
+    });
+    for( option in sorted_opts){
+        if(option.value==option_value)
+            option.selected=true;
+        else
+            option.selected=false;
+    }
+}
 function getSensorial(d_sen){
     ponderacion={
         '2.5' : 'No puedo escuchar alarmas ni visualizar rutas de evacuación.',
