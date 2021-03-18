@@ -19,6 +19,7 @@
   </head>
   <body onload="inicializar()">
     <script>
+      const DISTANCIA={{caso_random.v}}-({{caso_random.d_fis}}+{{caso_random.d_sen}}+{{caso_random.u}});
       function initMap(){
         var epicentroOptions={
           center: new google.maps.LatLng({{caso_random.s_lat}},{{caso_random.s_long}}),
@@ -58,6 +59,7 @@
       </div>
       <div class='col-sm-6 text-center'>
         <h3 class='display-3'>Magnitud</h3>
+        <p id='peligro' class="invisible">{{caso_random.p}}</p>
         <h2 class="indice">{{caso_random.mag}}</h2>
       </div>
     </div>
@@ -65,40 +67,48 @@
     <div class='row'>
       <div class='col-sm-6 '>
         <h3 class='display-3 text-center'>Mi Vulnerabilidad</h3>
+        <p id=vulnerabilidad class="invisible">{{caso_random.v}}</p>
         <ul class='fa-ul'>
           <li><span class="fa-li"><i class="fas fa-walking fa-3x"></i></span>
-            <select class="form-control" id="movilidad_select" onchange="recalcularIR({{caso_random}})">
-              <!-- <option selected id='movilidad' class='vulnerabilidades'><script>getMovilidad({{caso_random.d_fis}});</script></option> -->
+            <select class="form-control" id="movilidad_select" onchange="recalcularIR({{caso_random.V}})">
               <script>
                 renderMovilidadOptions('movilidad_select');
                 setSelectedOption('movilidad_select',{{caso_random.d_fis}});
               </script>
             </select>
-            </span>
           </li><br>
           <li>
             <span class='fa-li'>
               <i class="fas fa-assistive-listening-systems fa-2x"></i>
             </span>
-                <span class='vulnerabilidades' id='sensorial'><script>getSensorial({{caso_random.d_sen}});</script></span>
+              <select class="form-control" id="sensorial_select" onchange="recalcularIR({{caso_random.V}})">
+                <script>
+                  renderSensorialOptions('sensorial_select');
+                  setSelectedOption('sensorial_select',{{caso_random.d_sen}});
+                </script>
+              </select>
           </li><br>
           <li>
             <span class='fa-li'>
               <i class='far fa-building fa-2x'></i>
             </span>
-            <span id='ubicacion' class='vulnerabilidades'><script>getUbicacion({{caso_random.u}});
-            </script>
+            <select class="form-control" id="ubi_select" onchange="recalcularIR({{caso_random.V}})">
+              <script>
+                renderUbiOptions('ubi_select');
+                setSelectedOption('ubi_select',{{caso_random.U}});
+              </script>
+            </select>
           </li><br>
         </ul>
       </div>
       <div class='col-sm-3 text-center'>
         <h3 class='display-3'>Índice de Riesgo Calculado</h3>
-        <p class='indice'>{{caso_random.ir}}</p>
+        <p class='indice' id='indice'>{{caso_random.ir}}</p>
       </div>
       <div class='col-sm-3 flex-column centered-flex'>
         <h3 class='display-3 flex-element'>Mi Semáforo</h3>
         <div id='semaforo' class='semaforo flex-element'><script> getSemaforo('{{caso_random.sem}}');</script></div>
-        <header class='flex-element'>
+        <header class='flex-element' id='semaforo_header'>
           {{caso_random.sem}}
         </header>  
       </div>
