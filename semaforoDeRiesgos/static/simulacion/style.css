@@ -35,6 +35,9 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: darkslategrey;
 }
+.invisible{
+    display: none;
+}
 .jumbotron{
     padding-top: 0px !important;
     padding-bottom: 0px !important;
@@ -56,5 +59,8 @@ select{
     background:grey;
 }
 ul{
-  list-style: none;  
+  list-style: none;
+}
+#vulnerabilidad{
+    display: none;
 }
